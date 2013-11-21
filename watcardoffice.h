@@ -20,8 +20,13 @@ _Task WATCardOffice {
     };
 
     _Task Courier {
+      WATCardOffice &office;
+      Printer &printer;
+      Bank &bank;
 
       public:
+        Courier(WATCardOffice &office, Printer &printer, Bank &bank) :
+          office(office), printer(printer), bank(bank) {}
         void main();
     };
 

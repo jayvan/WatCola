@@ -1,10 +1,15 @@
 #include "watcardoffice.h"
 #include "watcard.h"
 #include "printer.h"
+#include "bank.h"
+#include "MPRNG.h"
+
+extern MPRNG prng;
 
 WATCardOffice::WATCardOffice(Printer& prt, Bank& bank, unsigned int numCouriers) :
   NUM_COURIERS(numCouriers), printer(prt), bank(bank) {
-  couriers = new WATCardOffice::Courier[NUM_COURIERS];
+  couriers = new WATCardOffice::Courier*[NUM_COURIERS];
+
 }
 
 WATCardOffice::~WATCardOffice() {
@@ -46,5 +51,25 @@ void WATCardOffice::main() {
 
 
 void WATCardOffice::Courier::main() {
+  while (true) {
+    // Get a job
+    Job *job = office.requestWork();
 
+    bank.withdraw(job->sid, job->amount);
+    job->card->deposit(job->amount);
+
+    if (prng(5) == 0) {
+      delete card;
+      job->result.exception(WATCardOffice::Lost());
+    } else {
+      job->result.delivery(job->card);
+    }
+
+    delete job;
+
+    _Accept(~WATCardOffice::Courier) {
+      break;
+    } _Else {
+    }
+  }
 }
