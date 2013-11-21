@@ -16,7 +16,7 @@ Bank::~Bank() {
 
 // Adds money to a bank account
 void Bank::deposit(unsigned int id, unsigned int amount) {
-  if (id >= NUM_STUDENTS) {
+  if (id < 0 || id >= NUM_STUDENTS) {
     uAbort("Invalid bank account ID");
   }
 
@@ -26,7 +26,7 @@ void Bank::deposit(unsigned int id, unsigned int amount) {
 
 // Withdraws money from a bank account
 void Bank::withdraw(unsigned int id, unsigned int amount) {
-  if (id >= NUM_STUDENTS) {
+  if (id < 0 || id >= NUM_STUDENTS) {
     uAbort("Invalid bank account ID");
   }
 
