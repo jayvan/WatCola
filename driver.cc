@@ -1,6 +1,7 @@
 #include "MPRNG.h"
 #include "printer.h"
 #include "bank.h"
+#include "parent.h"
 #include "config.h"
 #include <iostream>
 
@@ -34,6 +35,11 @@ void uMain::main() {
   processConfigFile(configPath, params);
 
   // Create in order: printer, bank, parent, WATCard ofﬁce, name server, vending machines, bottling plant, and students.
-  Printer p(params.numStudents, params.numVendingMachines, params.numCouriers);
-  Bank b(params.numStudents);
+  Printer printer(params.numStudents, params.numVendingMachines, params.numCouriers);
+  Bank bank(params.numStudents);
+  Parent parent(printer, bank, params.numStudents, params.parentalDelay);
+
+  for (int i = 0; i < 10; i++) {
+    yield();
+  }
 }
