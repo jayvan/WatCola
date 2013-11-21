@@ -1,6 +1,8 @@
 #ifndef __PRINTER_H__
 #define __PRINTER_H__
 
+#include <vector>
+
 _Cormonitor Printer {
   public:
     enum Kind { Parent, WATCardOffice, NameServer, Truck, BottlingPlant, Student, Vending, Courier };
@@ -18,10 +20,10 @@ _Cormonitor Printer {
     const unsigned int NUM_COURIERS;
     const unsigned int NUM_STATES;
 
-    char* states;
-    int* firstValues;
-    int* secondValues;
-    char* filled;
+    std::vector<char> states;
+    std::vector<int> firstValues;
+    std::vector<int> secondValues;
+    std::vector<char> filled;
 
     // communication variables
     unsigned int lid;

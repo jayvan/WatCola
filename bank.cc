@@ -1,16 +1,12 @@
 #include "bank.h"
+#include <vector>
 
 Bank::Bank(unsigned int numStudents) : NUM_STUDENTS(numStudents) {
-  balances = new unsigned int[NUM_STUDENTS];
+  balances.assign(NUM_STUDENTS, 0);
   sufficentBalance = new uCondition[NUM_STUDENTS];
-
-  for (unsigned int i = 0; i < NUM_STUDENTS; i++) {
-    balances[i] = 0;
-  }
 }
 
 Bank::~Bank() {
-  delete[] balances;
   delete[] sufficentBalance;
 }
 
