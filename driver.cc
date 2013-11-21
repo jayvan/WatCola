@@ -32,8 +32,6 @@ void uMain::main() {
   ConfigParms params;
   processConfigFile(configPath, params);
 
-
   // Create in order: printer, bank, parent, WATCard ofﬁce, name server, vending machines, bottling plant, and students.
   Printer p(params.numStudents, params.numVendingMachines, params.numCouriers);
-
 }
