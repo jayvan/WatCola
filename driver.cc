@@ -24,12 +24,12 @@ void uMain::main() {
   // Overload defaults from command line arguments
   switch (argc) {
     case 3:
-      if (atoi(argv[3]) <= 0) {
+      if (atoi(argv[2]) <= 0) {
         usage(argv);
       }
-      prng.seed(atoi(argv[3]));
+      prng.seed(atoi(argv[2]));
     case 2:
-      configPath = argv[2];
+      configPath = argv[1];
   }
 
   // Process configuration file

@@ -54,10 +54,12 @@ void Printer::main() {
   suspend();
 
   while (true) {
+    // If we're overwriting a value or if the task is finishing flush the buffer
     if (filled[lid] || state == 'F') {
       flush();
     }
 
+    // For finishing, print an F in the finishers column and dashes in every other column
     if (state == 'F') {
       for (unsigned int i = 0; i < NUM_STATES; i++) {
         if (i == lid) {
