@@ -4,6 +4,7 @@
 #include "parent.h"
 #include "watcardoffice.h"
 #include "config.h"
+#include "watcard.h"
 #include <iostream>
 
 using namespace std;
@@ -40,6 +41,9 @@ void uMain::main() {
   Bank bank(params.numStudents);
   Parent parent(printer, bank, params.numStudents, params.parentalDelay);
   WATCardOffice office(printer, bank, params.numCouriers);
+
+  WATCard::FWATCard myCard = office.create(0, 2);
+  delete myCard();
 
   for (int i = 0; i < 10; i++) {
     yield();
