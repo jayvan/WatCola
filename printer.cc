@@ -9,24 +9,16 @@ Printer::Printer( unsigned int numStudents, unsigned int numVendingMachines, uns
   NUM_COURIERS(numCouriers),
   NUM_STATES(5 + NUM_STUDENTS + NUM_VENDING_MACHINES + NUM_COURIERS)
 {
-  states = new char[NUM_STATES];
-  firstValues = new int[NUM_STATES];
-  secondValues = new int[NUM_STATES];
-  filled = new char[NUM_STATES]; // 0: no data, 1: state, 2: one val, 3: two vals
-
-  for (unsigned int i = 0; i < NUM_STATES; i++) {
-    filled[i] = false;
-  }
+  states.resize(NUM_STATES);
+  firstValues.resize(NUM_STATES);
+  secondValues.resize(NUM_STATES);
+  filled.assign(NUM_STATES, false);
 
   resume();
 }
 
 Printer::~Printer() {
   flush();
-  delete[] states;
-  delete[] firstValues;
-  delete[] secondValues;
-  delete[] filled;
 }
 
 void Printer::main() {

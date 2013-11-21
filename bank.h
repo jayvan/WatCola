@@ -1,6 +1,8 @@
 #ifndef __BANK_H__
 #define __BANK_H__
 
+#include <vector>
+
 // The Bank is a monitor, which behaves like a server, that manages student-account information for all students.
 // Each student’s account initially starts with a balance of $0. The parent calls deposit to endow gifts to a speciﬁc
 // student. A courier calls withdraw to transfer money on behalf of the WATCard ofﬁce for a speciﬁc student. The
@@ -9,7 +11,7 @@
 _Monitor Bank {
   const unsigned int NUM_STUDENTS;
 
-  unsigned int* balances;
+  std::vector<unsigned int> balances;
   uCondition* sufficentBalance;
 
   public:
