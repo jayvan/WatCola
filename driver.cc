@@ -2,6 +2,7 @@
 #include "printer.h"
 #include "bank.h"
 #include "parent.h"
+#include "watcardoffice.h"
 #include "config.h"
 #include <iostream>
 
@@ -38,6 +39,7 @@ void uMain::main() {
   Printer printer(params.numStudents, params.numVendingMachines, params.numCouriers);
   Bank bank(params.numStudents);
   Parent parent(printer, bank, params.numStudents, params.parentalDelay);
+  WATCardOffice office(printer, bank, params.numCouriers);
 
   for (int i = 0; i < 10; i++) {
     yield();
