@@ -20,15 +20,22 @@ _Task WATCardOffice {
     };
 
     _Task Courier {
+      const unsigned int ID;
+      WATCardOffice &office;
+      Printer &printer;
+      Bank &bank;
 
       public:
+        Courier(unsigned int id, WATCardOffice &office, Printer &printer, Bank &bank) :
+          ID(id), office(office), printer(printer), bank(bank) {}
         void main();
     };
 
     const unsigned int NUM_COURIERS;
+    bool closed;
     Printer& printer;
     Bank& bank;
-    Courier *couriers;
+    Courier** couriers;
     std::queue<Job*> jobs;
 
     void main();
