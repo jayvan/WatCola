@@ -2,7 +2,7 @@
 #include "MPRNG.h"
 #include "vendingmachine.h"
 #include "printer.h"
-//#include "nameserver.h"
+#include "nameserver.h"
 #include "watcardoffice.h"
 
 #include "uFuture.h"
@@ -11,7 +11,7 @@
 extern MPRNG prng;
 
 Student::Student( Printer &prt, NameServer &nameServer, WATCardOffice &cardOffice, unsigned int id,
-         unsigned int maxPurchases ) : prt(prt), nameServer(nameServer), 
+         unsigned int maxPurchases ) : prt(prt), nameServer(nameServer),
           cardOffice(cardOffice), id(id), maxPurchases(maxPurchases) {
 
 }
@@ -24,7 +24,7 @@ void Student::main() {
   WATCard::FWATCard fcard = cardOffice.create(id, 5);
 
   while(numBottles > 0) {
-    VendingMachine* vm /*= nameServer.getMachine(id)*/; 
+    VendingMachine* vm = nameServer.getMachine(id);
     prt.print(Printer::Student, id, 'V', vm->getId());
 
     //Buy from the vending maching
@@ -46,11 +46,11 @@ void Student::main() {
       }
       catch(WATCardOffice::Lost) {
         prt.print(Printer::Student, id, 'L');
-        fcard = cardOffice.create(id, 5); 
+        fcard = cardOffice.create(id, 5);
       }
     }
   }
   if (fcard() != NULL) delete fcard();
   prt.print(Printer::Student, id, 'F');
-}  
+}
 

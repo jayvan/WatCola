@@ -3,8 +3,9 @@
 #include "bank.h"
 #include "parent.h"
 #include "watcardoffice.h"
+#include "nameserver.h"
+#include "vendingmachine.h"
 #include "config.h"
-#include "watcard.h"
 #include <iostream>
 
 using namespace std;
@@ -36,16 +37,21 @@ void uMain::main() {
   ConfigParms params;
   processConfigFile(configPath, params);
 
-  // Create in order: printer, bank, parent, WATCard ofﬁce, name server, vending machines, bottling plant, and students.
+  // Create in order: printer, bank, parent, WATCard office, name server, vending machines, bottling plant, and students.
   Printer printer(params.numStudents, params.numVendingMachines, params.numCouriers);
   Bank bank(params.numStudents);
   Parent parent(printer, bank, params.numStudents, params.parentalDelay);
   WATCardOffice office(printer, bank, params.numCouriers);
+  NameServer nameServer(printer, params.numVendingMachines, params.numStudents);
+  VendingMachine* machines[params.numVendingMachines];
 
-  WATCard::FWATCard myCard = office.create(0, 2);
-  delete myCard();
-
-  for (int i = 0; i < 10; i++) {
-    yield();
+  // Create vending machines
+  for (unsigned int i = 0; i < params.numVendingMachines; i++) {
+    machines[i] = new VendingMachine(printer, nameServer, i, params.sodaCost, params.maxStockPerFlavour);
   }
+
+  for (unsigned int i = 0; i < params.numVendingMachines; i++) {
+    delete machines[i];
+  }
+
 }

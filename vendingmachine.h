@@ -1,7 +1,7 @@
 #ifndef __VENDING_MACHINE_H__
 #define __VENDING_MACHINE_H__
 
-#include "watcard.h" 
+#include "watcard.h"
 
 // Forward Declarations
 _Cormonitor Printer;
