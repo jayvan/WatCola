@@ -10,8 +10,8 @@ _Task Student {
     Printer &prt;
     NameServer &nameServer;
     WATCardOffice &cardOffice;
-    unsigned int id;
-    unsigned int maxPurchases;
+    const unsigned int ID;
+    const unsigned int MAX_PURCHASES;
 
     void main();
   public:

@@ -1,8 +1,8 @@
 #include "vendingmachine.h"
 #include "watcard.h"
 
-VendingMachine::VendingMachine(Printer &prt, NameServer &nameServer, unsigned int id, unsigned int sodaCost, unsigned int maxStockPerFlavour) :
-  prt(prt), nameServer(nameServer), id(id), sodaCost(sodaCost), maxStockPerFlavour(maxStockPerFlavour) {
+VendingMachine::VendingMachine(Printer &prt, NameServer &nameServer, unsigned int id, unsigned int sodaCost, unsigned int maxStockPerFlavour) : 
+  prt(prt), nameServer(nameServer), ID(id), SODA_COST(sodaCost), MAX_STOCK_PER_FLAVOUR(maxStockPerFlavour) {
 
 }
 
@@ -23,9 +23,9 @@ void VendingMachine::restocked() { //TODO: Do this
 }
 
 unsigned int VendingMachine::cost() {
-  return sodaCost;
+  return SODA_COST;
 }
 
 unsigned int VendingMachine::getId() {
-  return id;
+  return ID;
 }

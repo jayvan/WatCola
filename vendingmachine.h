@@ -11,9 +11,9 @@ class WATCard;
 _Task VendingMachine {
     Printer& prt;
     NameServer &nameServer;
-    unsigned int id;
-    unsigned int sodaCost;
-    unsigned int maxStockPerFlavour;
+    const unsigned int ID;
+    const unsigned int SODA_COST;
+    const unsigned int MAX_STOCK_PER_FLAVOUR;
 
     void main();
   public:
