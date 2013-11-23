@@ -19,7 +19,6 @@ void VendingMachine::main() {
   // Register with the name server
   nameServer.VMregister(this);
 
-
   while (true) {
     _Accept(~VendingMachine) {
       break;
@@ -30,7 +29,7 @@ void VendingMachine::main() {
   }
 
   // Print finished message
-  printer.print(Printer::Vending, ID, 'S');
+  printer.print(Printer::Vending, ID, 'F');
 }
 
 VendingMachine::Status VendingMachine::buy( Flavours flavour, WATCard &card ) {

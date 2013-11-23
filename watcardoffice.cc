@@ -22,10 +22,8 @@ WATCardOffice::~WATCardOffice() {
   closed = true;
 
   // Accept final requests for work, give the couriers NULL jobs
-  while (true) {
+  for (unsigned int i = 0; i < NUM_COURIERS; i++) {
     _Accept(requestWork) {
-    } _Else {
-      break;
     }
   }
 
@@ -35,6 +33,9 @@ WATCardOffice::~WATCardOffice() {
   }
 
   delete[] couriers;
+
+  // Print that we're done
+  printer.print(Printer::WATCardOffice, 'F');
 }
 
 WATCard::FWATCard WATCardOffice::create(unsigned int sid, unsigned int amount) {
@@ -88,8 +89,6 @@ void WATCardOffice::main() {
     } or _Accept(transfer, create) { }
   }
 
-  // Print that we're done
-  printer.print(Printer::WATCardOffice, 'F');
 }
 
 
