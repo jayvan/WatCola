@@ -16,7 +16,7 @@ _Task BottlingPlant {
 
     Truck* truck;
     bool closing;
-    unsigned int shipment;
+    unsigned int shipment[4];
 
     void main();
   public:
