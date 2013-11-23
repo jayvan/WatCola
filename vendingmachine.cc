@@ -7,9 +7,16 @@ VendingMachine::VendingMachine(Printer &prt, NameServer &nameServer, unsigned in
   printer(prt), nameServer(nameServer), ID(id), SODA_COST(sodaCost), MAX_STOCK_PER_FLAVOUR(maxStockPerFlavour)
 {
   restocking = false;
+
+  stock = new unsigned int[4];
+
   for (unsigned int i = 0; i < 4; i++) {
     stock[i] = 0;
   }
+}
+
+VendingMachine::~VendingMachine() {
+  delete[] stock;
 }
 
 void VendingMachine::main() {
@@ -33,14 +40,14 @@ void VendingMachine::main() {
 }
 
 VendingMachine::Status VendingMachine::buy( Flavours flavour, WATCard &card ) {
-  if (stock[flavour] == 0) {
+  if (stock[(int)flavour] == 0) {
     return STOCK;
   } else if (card.getBalance() < SODA_COST) {
     return FUNDS;
   }
 
   card.withdraw(SODA_COST);
-  stock[flavour]--;
+  stock[(int)flavour]--;
 
   // Print that student bought a soda
   printer.print(Printer::Vending, ID, 'B', (unsigned int)flavour, stock[flavour]);
@@ -57,7 +64,7 @@ unsigned int* VendingMachine::inventory() {
   return stock;
 }
 
-void VendingMachine::restocked() { //TODO: Do this
+void VendingMachine::restocked() {
   if (!restocking) {
     uAbort("Vending machine marked as restocked without ever starting stocking");
   }

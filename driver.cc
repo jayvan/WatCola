@@ -5,6 +5,8 @@
 #include "watcardoffice.h"
 #include "nameserver.h"
 #include "vendingmachine.h"
+#include "student.h"
+#include "bottlingplant.h"
 #include "config.h"
 #include <iostream>
 
@@ -44,12 +46,26 @@ void uMain::main() {
   WATCardOffice office(printer, bank, params.numCouriers);
   NameServer nameServer(printer, params.numVendingMachines, params.numStudents);
   VendingMachine* machines[params.numVendingMachines];
+  BottlingPlant* plant = new BottlingPlant(printer, nameServer, params.numVendingMachines, 
+      params.maxShippedPerFlavour, params.maxStockPerFlavour, params.timeBetweenShipments); 
+  Student* students[params.numStudents];
 
   // Create vending machines
   for (unsigned int i = 0; i < params.numVendingMachines; i++) {
     machines[i] = new VendingMachine(printer, nameServer, i, params.sodaCost, params.maxStockPerFlavour);
   }
 
+  //Create students
+  for (unsigned int i = 0; i < params.numStudents; i++) {
+    students[i] = new Student(printer, nameServer, office, i, params.maxPurchases);
+  } 
+
+  //Delete students
+  for (unsigned int i = 0; i < params.numStudents; i++) {
+    delete students[i];
+  }
+  //Delete Bottling plant
+  delete plant;
   // Delete vending machines
   for (unsigned int i = 0; i < params.numVendingMachines; i++) {
     delete machines[i];

@@ -19,6 +19,7 @@ Printer::Printer( unsigned int numStudents, unsigned int numVendingMachines, uns
 
 Printer::~Printer() {
   flush();
+  cout << "***********************" << endl;
 }
 
 void Printer::main() {

@@ -36,7 +36,7 @@ void Student::main() {
           prt.print(Printer::Student, ID, 'V', vm->getId());
           break;
         }
-        else if (VendingMachine::FUNDS) { //Insufficient funds
+        else if (status == VendingMachine::FUNDS) { //Insufficient funds
           fcard = cardOffice.transfer(ID, 5 + vm->cost(), fcard());
         }
         else {
