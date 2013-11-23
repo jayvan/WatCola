@@ -29,10 +29,15 @@ void Truck::main() {
     }
     prt.print(Printer::Truck, 'P', total);
 
+    // If the plant hasn't produced any bottles, request a new batch
+    if (total == 0) {
+      continue;
+    }
+
     for (unsigned int i = 0; i < NUM_VENDING_MACHINES; ++i) {
       unsigned int* inventory = machineList[i]->inventory();
       int id = machineList[i]->getId();
-      prt.print(Printer::Truck, 'd', id, total); 
+      prt.print(Printer::Truck, 'd', id, total);
 
       int unstocked = 0;
       for (int j = 0; j < 4; ++j) {
@@ -49,7 +54,7 @@ void Truck::main() {
       }
       prt.print(Printer::Truck, 'D', id, total);
       machineList[i]->restocked();
-      
+
       if (total == 0) {
         break;
       }
