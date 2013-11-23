@@ -9,11 +9,14 @@ _Task NameServer;
 class WATCard;
 
 _Task VendingMachine {
-    Printer& prt;
+    Printer& printer;
     NameServer &nameServer;
     const unsigned int ID;
     const unsigned int SODA_COST;
     const unsigned int MAX_STOCK_PER_FLAVOUR;
+
+    unsigned int stock[4];
+    bool restocking;
 
     void main();
   public:

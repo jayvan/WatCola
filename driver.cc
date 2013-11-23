@@ -50,8 +50,8 @@ void uMain::main() {
     machines[i] = new VendingMachine(printer, nameServer, i, params.sodaCost, params.maxStockPerFlavour);
   }
 
+  // Delete vending machines
   for (unsigned int i = 0; i < params.numVendingMachines; i++) {
     delete machines[i];
   }
-
 }
