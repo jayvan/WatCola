@@ -24,6 +24,11 @@ void uMain::main() {
   prng.seed(getpid());
   char* configPath = (char*)"soda.config";
 
+  // Check for too many arguments
+  if (argc >= 4) {
+    usage(argv);
+  }
+
   // Overload defaults from command line arguments
   switch (argc) {
     case 3:
