@@ -21,7 +21,7 @@ VendingMachine::~VendingMachine() {
 
 void VendingMachine::main() {
   // Print starting message
-  printer.print(Printer::Vending, ID, 'S');
+  printer.print(Printer::Vending, ID, 'S', SODA_COST);
 
   // Register with the name server
   nameServer.VMregister(this);
